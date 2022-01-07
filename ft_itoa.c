@@ -6,7 +6,7 @@
 /*   By: trozain <trozain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 19:29:06 by trozain           #+#    #+#             */
-/*   Updated: 2022/01/07 01:50:54 by trozain          ###   ########.fr       */
+/*   Updated: 2022/01/07 15:35:00 by trozain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ char	*ft_itoa(int n)
 {
 	char		*p;
 	size_t		ns;
-//	size_t		i;
+	size_t		i;
 
-//	i = 0;
+	i = 0;
 	if (n == INT_MIN)
 		return (ft_strdup("-2147483648"));
 	ns = calcul(n);
-	p = malloc(sizeof(char *) * (ns + 1));
+	p = malloc(ns);
 	if (p == 0)
 		return (0);
 	p[ns] = 0;
@@ -32,8 +32,9 @@ char	*ft_itoa(int n)
 	{
 		p[0] = '-';
 		n *= -1;
+		i = 1;
 	}
-	while (0 < ns--)
+	while (i < ns--)
 	{
 		p[ns] = (n % 10) + '0';
 		n /= 10;
@@ -57,3 +58,12 @@ int	calcul(int nbr)
 	}
 	return (i);
 }
+/*
+int main()
+{
+	printf("%s\n", ft_itoa(INT_MIN));
+	printf("%d\n", calcul(INT_MIN));
+	printf("%s\n", ft_itoa(42));
+	printf("%s\n", ft_itoa(10));
+}
+*/

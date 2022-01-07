@@ -6,14 +6,14 @@
 /*   By: trozain <trozain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 16:02:25 by trozain           #+#    #+#             */
-/*   Updated: 2022/01/07 01:35:13 by trozain          ###   ########.fr       */
+/*   Updated: 2022/01/07 15:40:59 by trozain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*word(const char *str, int start, int finish);
-int		count(const char *str, char c);
+static char	*word(const char *str, int start, int finish);
+static int	count(const char *str, char c);
 
 char	**ft_split(char const *s, char c)
 {
@@ -27,10 +27,10 @@ char	**ft_split(char const *s, char c)
 	split = malloc((count(s, c) + 1) * sizeof(char *));
 	if (!split)
 		return (0);
-	i = 0;
+	i = -1;
 	j = 0;
 	k = -1;
-	while (i <= ft_strlen(s))
+	while (++i <= ft_strlen(s))
 	{
 		if (s[i] != c && k < 0)
 			k = i;
@@ -39,13 +39,12 @@ char	**ft_split(char const *s, char c)
 			split[j++] = word(s, k, i);
 			k = -1;
 		}
-		i++;
 	}
 	split[j] = 0;
 	return (split);
 }
 
-int	count(const char *str, char c)
+static int	count(const char *str, char c)
 {
 	int	i;
 	int	j;
@@ -66,7 +65,7 @@ int	count(const char *str, char c)
 	return (i);
 }
 
-char	*word(const char *str, int start, int finish)
+static char	*word(const char *str, int start, int finish)
 {
 	char	*w;
 	int		i;
